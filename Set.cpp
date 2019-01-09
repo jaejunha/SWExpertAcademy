@@ -13,7 +13,6 @@ public:
 		struct Node *right;
 
 		Node(T v) {
-			priority = rand();
 			val = v;
 			right = left = NULL;
 		}
@@ -28,7 +27,6 @@ public:
 		if (r == NULL)
 			r = n;
 		else {
-			//split
 			if (n->val > r->val)
 				r->right = insert(r->right, n);
 			else if (n->val < r->val)
@@ -55,10 +53,36 @@ public:
 	bool find(T v) {
 		return find(root, v);
 	}
+	Node* merge(Node* a, Node* b) {
+		if (a == NULL)
+			return b;
+		if (b == NULL)
+			return a;
+		if (a->val < b->val)
+			a->right = merge(a->right, b);
+		else
+			a->left = merge(a->left, b);
+		return a;
+	}
+	Node* remove(Node* r, T v) {
+		if (r->val == v) {
+			Node* ret = merge(r->left, r->right);
+			delete(r);
+			return ret;
+		}
+		else if (r->val > v)
+			remove(r->left, v);
+		else
+			remove(r->right, v);
+		return r;
+	}
+	void remove(T v) {
+		root = remove(root, v);
+	}
 };
 int main()
 {
-	set<int> s = set<int>();
+	set<int> s;
 	s.insert(1);
 	cout << s.find(1) << endl;
 	cout << s.find(2) << endl;
@@ -68,7 +92,8 @@ int main()
 	s.insert(2);
 	cout << s.find(1) << endl;
 	cout << s.find(2) << endl;
-	//s.remove(1);
+	s.remove(1);
 	cout << s.find(1) << endl;
+	cout << s.find(3) << endl;
 	return 0;
 }
