@@ -1,0 +1,21 @@
+거듭제곱 => 분할과 정복 활용
+
+long long ret = 1;
+    
+for(int i=1;i<=b;i++){
+
+        ret *= a;
+    
+}
+
+보다
+
+long long ret = 1;
+    
+for(int i=1;i<=b;i++, ret*=a);
+
+가 더빠르다(for문 축약형)
+
+* for문 축약형 *
+
+무조건 비트 연산이 산술연산 보다 빠르다? <= 글쎄....
