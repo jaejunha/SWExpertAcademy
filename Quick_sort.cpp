@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int* quick(int *arr, int l, int r) {
+void quick(int *arr, int l, int r) {
 	int i = l;
 	int j = r;
 	int pivot = arr[(l + r) / 2];
